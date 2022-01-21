@@ -3,7 +3,7 @@ locals {
 }
 
 variable "project" {
-  description = "silent-hook-338802"
+  description = "Your GCP Project ID"
 }
 
 variable "region" {
