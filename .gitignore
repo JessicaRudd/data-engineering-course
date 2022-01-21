@@ -5,7 +5,8 @@
 *.tfstate.*
 **.terraform
 **.terraform.lock.*
-**google_credentials.json
+week_1_basics_n_setup/1_terraform_gcp/silent-hook-338802-0d6fd71d3ce7.json
 **logs/
 **.env
 **__pycache__/
+week_1_basics_n_setup/ny_taxi_postgres_data/

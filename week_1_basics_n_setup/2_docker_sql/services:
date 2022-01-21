@@ -35,7 +35,7 @@ python ingest_data.py \
   --url=${URL}
 
 docker build -t taxi_ingest:v001 .
-export URL="http://127.0.0.1:8000/yellow_tripdata_2021-01.csv"
+
 docker run \
   --network=pg-network  \
   taxi_ingest:v001 \
@@ -47,3 +47,8 @@ docker run \
     --table_name=yellow_taxi_data \
     --url=${URL}
   
+run local server (from current folder)
+python -m http.server
+
+then
+export URL="http://127.0.0.1:8000/yellow_tripdata_2021-01.csv"
