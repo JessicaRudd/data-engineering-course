@@ -44,7 +44,8 @@ x-airflow-common:
   # In order to add custom dependencies or upgrade provider packages you can use your extended image.
   # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
   # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
-  build:
+  # image: ./Dockerfile
+  build: 
     context: .
     dockerfile: ./Dockerfile
   environment:
@@ -58,10 +59,17 @@ x-airflow-common:
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKEND: 'airflow.api.auth.backend.basic_auth'
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
+    GOOGLE_APPLICATION_CREDENTIALS: /.google/credentials/google_credentials.json
+    AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: 'google-cloud-platform://?extra__google_cloud_platform__key_path=/.google/credentials/google_credentials.json'
+    GCP_PROJECT_ID: 'silent-hook-338802' #change to my project id
+    GCP_GCS_BUCKET: "dtc_data_lake_silent-hook-338802" # change to my bucket id
+
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
+    - ~/.google/credentials/:/.google/credentials:ro
+    
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
